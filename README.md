@@ -5,13 +5,10 @@ This is the backend system for the Royal Library of Belgium's book management to
 ## Features Checklist
 
 - **Reference Management**
-  - [ ] GET a book reference by ID
+  - [x] GET a book reference by ID
   - [x] ADD a new book reference
-  - [ ] DELETE a book reference
-- **Catalog Search**
-  - [ ] Search books by publication year
-  - [ ] Search books by title
-  - [ ] Search books by author
+  - [x] DELETE a book reference
+  - [x] Search books by publication year, title, or author
 - **Reservation & Borrowing System**
   - [ ] Users can reserve/borrow books online (4 copies per reference)
   - [ ] Limit: Max 3 books per user, no duplicate references
@@ -31,23 +28,18 @@ This is the backend system for the Royal Library of Belgium's book management to
 - **Documentation**
   - [ ] Document API endpoints 
 
-## Tech Stack
-
-- NodeJS with TypeScript: Backend runtime and type safety
-- ExpressJS: API framework
-- MongoDB: Database for storing books, users, and reservations
-
 ## Setup
 
 1. **Prerequisites**
    - Node.js (v16 or higher)
    - MongoDB (local or cloud instance)
    - npm or yarn
+   - Docker (optional, for MongoDB)
 
 2. **Installation**
    ```
-   git clone <repository-url>
-   cd book-library-tool
+   git clone https://github.com/lucasdefarias/book-library.git
+   cd book-library
    npm install
     ```
 3. **Environment Variables**

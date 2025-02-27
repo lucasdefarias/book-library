@@ -2,34 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { BookModel } from '../../../infrastructure/database/mongoose/schemas/BookSchema';
 
 class BookController {
-  // Get all books with pagination
-  async getAllBooks(req: Request, res: Response, next: NextFunction) {
-    try {
-      const page = parseInt(req.query.page as string) || 1;
-      const limit = parseInt(req.query.limit as string) || 10;
-      const skip = (page - 1) * limit;
-
-      const books = await BookModel.find()
-        .select('title author publicationYear isbn availableCopies retailPrice')
-        .skip(skip)
-        .limit(limit);
-
-      const total = await BookModel.countDocuments();
-
-      res.status(200).json({
-        success: true,
-        count: books.length,
-        total,
-        pagination: {
-          currentPage: page,
-          totalPages: Math.ceil(total / limit),
-        },
-        data: books
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
 
   // Get a single book by ID
   async getBookById(req: Request, res: Response, next: NextFunction) {
@@ -66,31 +38,6 @@ class BookController {
       const book = await BookModel.create(req.body);
 
       res.status(201).json({
-        success: true,
-        data: book
-      });
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  // Update a book
-  async updateBook(req: Request, res: Response, next: NextFunction) {
-    try {
-      const book = await BookModel.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        { new: true, runValidators: true }
-      );
-
-      if (!book) {
-        return res.status(404).json({
-          success: false,
-          message: 'Book not found'
-        });
-      }
-
-      res.status(200).json({
         success: true,
         data: book
       });
